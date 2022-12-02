@@ -116,6 +116,8 @@ TABLE OF CONTENT
   text-decoration: none;
   color: black;
   font-size: 25px;
+  position: absolute;
+  right: 0;
 }
 
 
@@ -374,4 +376,14 @@ button {
   border: none;
   font-size: 16px;
   background-color: transparent;
+}
+
+.cart-main {
+  padding-top: 100px; 
+  padding-left: 50px; 
+  padding-right: 50px;
+}
+
+.cart-margin-bottom {
+  margin-bottom: 30px
 }
