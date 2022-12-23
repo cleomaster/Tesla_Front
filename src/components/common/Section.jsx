@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
 
-function section({ data }) {
+
+function Section({ product }) {
+
+  useEffect(() => {
+    console.log(product.name);
+  }, [])
+
   return (
-    <section className={"product " + data.imageclassName}>
+    <section className={"product " + product.imageClass}>
       <div className="product-info">
-        <h1>{data.name}</h1>
+        <h1>{product.name}</h1>
         <p>Order Online For Touchless Delivery</p>
       </div>
       <div>
         <div className="button-group">
           <div className="button-dark-rounded">
-            <a href="model3.html" className="dark">
+            <Link to={`/product/${product.product_id}`} className="dark">
               CUSTOM ORDER
-            </a>
+            </Link>
           </div>
-          <div className="button-light-rounded">
+          {/* <div className="button-light-rounded">
             <a className="light" href="cart.html">
               EXISTING INVENTORY
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
   );
 }
 
-export default section;
+export default Section;

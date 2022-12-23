@@ -3,14 +3,32 @@ import model_s_Image from "../../assets/model-s.jpg";
 import model_y_Image from "../../assets/model-y.jpg";
 import model_x_Image from "../../assets/model-x.jpg";
 import model_3_Image from "../../assets/model-3.jpg";
+import axios from "axios";
+import jwtDecode from 'jwt-decode';
+import { APIUrl } from './../services/services';
 
-function Product({ data }) {
+
+
+function Product({ product, user }) {
   const getImage = () => {
-    if (data.imageClass === "model-s") return model_s_Image;
-    if (data.imageClass === "model-y") return model_y_Image;
-    if (data.imageClass === "model-x") return model_x_Image;
-    if (data.imageClass === "model-3") return model_3_Image;
+    if (product.imageClass === "model-s") return model_s_Image;
+    if (product.imageClass === "model-y") return model_y_Image;
+    if (product.imageClass === "model-x") return model_x_Image;
+    if (product.imageClass === "model-3") return model_3_Image;
   };
+
+  async function addToCart() {
+    let config = {
+      headers: {
+        "x-auth-token": user.header,
+      },
+    };
+    await axios.post(
+      `${APIUrl}/api/carts/add/` + product.product_id,
+      {},
+      config
+    );
+  }
 
   return (
     <div className="container">
@@ -20,19 +38,23 @@ function Product({ data }) {
             <img className="img" alt="Product" src={getImage()} />
           </div>
           <div className="right">
-            <h1>{data.name}</h1>
+            <h1>{product.name}</h1>
             <div className="product-detail">
-              <p>
-                With the most storage space and towing capacity of any electric
-                SUV, and seating for up to seven adults, Model X delivers
-                maximum utility. Front doors open and close automatically,
-                Falcon Wing doors allow for easier loading and a standard
-                trailer hitch lets you bring your gear anywhere you go.
-              </p>
+              <p>{product.description}</p>
             </div>
             <p>In Stock!</p>
-            <p className="product-price">Price- $20000</p>
-            <button className="btnprimary" href="#">
+            <p className="product-price">Price- ${product.price}</p>
+            <button
+              onClick={() => {
+                try {
+                  jwtDecode(localStorage.getItem("token"));
+                  addToCart();
+                } catch (ex) {
+                  alert("Please log in to continue");
+                }
+              }}
+              className="btnprimary"
+            >
               Add to cart
             </button>
             <br />

@@ -261,6 +261,8 @@ TABLE OF CONTENT
   width: 192px;
   height: 192px;
   border-radius: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .cart-item-info {
@@ -386,4 +388,76 @@ button {
 
 .cart-margin-bottom {
   margin-bottom: 30px
+}
+
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  /* outline: 1px solid red; */
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+input[type='text'],input[type='password'],input[type='email'] {
+  padding: 8px 12px;
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+input[type='text']:focus,input[type='password']:focus, input[type='email']:focus {
+  outline: none;
+  border: 1px solid blueviolet;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-margin-bottom {
+  margin-bottom: 3rem;
+}
+
+.text-margin-bottom {
+  margin-bottom: 5px;
+}
+.form-actionButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+.form-button {
+  background-color: #4F46E5;
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 400;
+}
+
+.form-anchor-button {
+  text-decoration: none;
+  color: #4F46E5;
+  border: none;
+  background-color: white;
 }

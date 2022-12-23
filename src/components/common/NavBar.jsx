@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { APIUrl } from './../services/services';
+
 
 function NavBar(props) {
+  const navigate = useNavigate();
   const [sideBarClass, setSideBarClass] = useState("sidebar");
 
   const openNav = () => {
@@ -13,6 +18,11 @@ function NavBar(props) {
     setSideBarClass("sidebar");
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   return (
     <>
       <div className={sideBarClass} id="sidebar">
@@ -20,48 +30,53 @@ function NavBar(props) {
           X
         </button>
         <div className="siderbar-buttons">
-          <a className="sidebar-button" href="a">
+          <Link className="sidebar-button" to="/login">
             Sign In
-          </a>
-          <a className="sidebar-button" href="a">
-            Model 3
-          </a>
-          <a className="sidebar-button" href="a">
-            Model Y
-          </a>
-          <a className="sidebar-button" href="a">
+          </Link>
+          <Link className="sidebar-button" to="/product/1">
             Model X
-          </a>
-          <a className="sidebar-button" href="a">
+          </Link>
+          <Link className="sidebar-button" to="/product/2">
+            Model Y
+          </Link>
+          <Link className="sidebar-button" to="/product/3">
             Model S
-          </a>
+          </Link>
+          <Link className="sidebar-button" to="/product/4">
+            Model S
+          </Link>
         </div>
       </div>
       <div className="navbar-sticky">
         <div className="navbar">
           <div>
-            <a className="logo" href="index.html">
+            <Link className="logo" to="/">
               <img src={logo} alt="logo" />
-            </a>
+            </Link>
           </div>
           <div className="navbtns">
-            <a className="navbtn" href="http://localhost:3000/index.html">
-              Model 3
-            </a>
-            <a className="navbtn" href="http://localhost:3000/index.html">
-              Model Y
-            </a>
-            <a className="navbtn" href="http://localhost:3000/index.html">
+            <Link className="navbtn" to="/product/1">
               Model X
-            </a>
-            <a className="navbtn" href="http://localhost:3000/index.html">
+            </Link>
+            <Link className="navbtn" to="/product/2">
+              Model Y
+            </Link>
+            <Link className="navbtn" to="/product/3">
               Model S
-            </a>
+            </Link>
+            <Link className="navbtn" to="/product/4">
+              Model 3
+            </Link>
           </div>
           <div>
-            <a className="navbtn" href="http://localhost:3000/index.html">
+          {localStorage.getItem("token") &&   <Link className="navbtn" to="/cartpage">
+              Cart
+            </Link>}
+            {localStorage.getItem("token") === null ?  <Link className="navbtn" to="/login">
               Sign In
-            </a>
+            </Link> : <button onClick={logout} className="navbtn" to="/login">
+              Logout
+            </button>}
             <button
               onClick={openNav}
               className="navbtn-menu"

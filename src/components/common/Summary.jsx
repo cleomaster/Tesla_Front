@@ -1,31 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-function Summary(props) {
+
+function Summary({ summary, getSummary }) {
+
+  useEffect(() => {
+    getSummary();
+  }, [])
+
   return (
     <>
-      <div class="summary">
-        <div class="summary-cata">
-          <p class="summary-text summary-head">Order Summary</p>
-          <div class="summary-item">
-            <p class="summary-text">Subtotal</p>
-            <p class="summary-text">$100</p>
+      <div className="summary">
+        <div className="summary-cata">
+          <p className="summary-text summary-head">Order Summary</p>
+          <div className="summary-item">
+            <p className="summary-text">Subtotal</p>
+            <p className="summary-text">${summary.total}</p>
           </div>
           <hr />
-          <div class="summary-item">
-            <p class="summary-text">Shipping Estimate</p>
-            <p class="summary-text">$500</p>
+          <div className="summary-item">
+            <p className="summary-text">Shipping Estimate</p>
+            <p className="summary-text">${summary.total === 0 ? "0" : "500"}</p>
           </div>
           <hr />
-          <div class="summary-item">
-            <p class="summary-text">Tax estimate</p>
-            <p class="summary-text">$50</p>
+          <div className="summary-item">
+            <p className="summary-text">Tax estimate</p>
+            <p className="summary-text">${summary.total === 0 ? "0" : "50"}</p>
           </div>
           <hr />
-          <div class="summary-item">
-            <p class="summary-text">Order total</p>
-            <p class="summary-text">$6000</p>
+          <div className="summary-item">
+            <p className="summary-text">Order total</p>
+            <p className="summary-text">${summary.total === 0 ? summary.total : summary.total + 500 + 50}</p>
           </div>
-          <button class="btnprimary btnblock margin-left-right" href="#">
+          <button className="btnprimary btnblock margin-left-right" href="#">
             Checkout
           </button>
         </div>
